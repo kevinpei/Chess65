@@ -1,38 +1,38 @@
 package chess;
 
 public class Chessboard {
-	String[][] chessboard = new String[8][8];
+	ChessPiece[][] chessboard = new ChessPiece[8][8];
 	boolean whiteIsGoing;
 	
 	public void initializeSide(int row, String color) {
-		this.chessboard[row][0] = color + "R";
-		this.chessboard[row][1] = color + "N";
-		this.chessboard[row][2] = color + "B";
-		this.chessboard[row][3] = color + "Q";
-		this.chessboard[row][4] = color + "K";
-		this.chessboard[row][5] = color + "B";
-		this.chessboard[row][6] = color + "N";
-		this.chessboard[row][7] = color + "R";
+		this.chessboard[row][0] = new Rook(color);
+		this.chessboard[row][1] = new Knight(color);
+		this.chessboard[row][2] = new Bishop(color);
+		this.chessboard[row][3] = new Queen(color);
+		this.chessboard[row][4] = new King(color);
+		this.chessboard[row][5] = new Bishop(color);
+		this.chessboard[row][6] = new Knight(color);
+		this.chessboard[row][7] = new Rook(color);
 	}
 	
 	public Chessboard() {
 		initializeSide(0, "b");
 		for (int i = 0; i < 8; i++) {
-			this.chessboard[1][i] = "bp";
+			this.chessboard[1][i] = new Pawn("b");
 		}
 		for (int i = 2; i < 6; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (i % 2 == 0 && j % 2 == 1) {
-					this.chessboard[i][j] = "##";
+					this.chessboard[i][j] = new None("##");
 				} else if (i % 2 == 1 && j % 2 == 0){
-					this.chessboard[i][j] = "##";
+					this.chessboard[i][j] = new None("##");
 				} else {
-					this.chessboard[i][j] = "  ";
+					this.chessboard[i][j] = new None("  ");
 				}
 			}
 		}
 		for (int i = 0; i < 8; i++) {
-			this.chessboard[6][i] = "wp";
+			this.chessboard[6][i] = new Pawn("w");
 		}
 		initializeSide(7, "w");
 		whiteIsGoing = true;
@@ -49,6 +49,10 @@ public class Chessboard {
 			}
 		}
 		return output;
+	}
+	
+	public ChessPiece[][] getBoard() {
+		return this.chessboard;
 	}
 	
 }
