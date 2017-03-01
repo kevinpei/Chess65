@@ -2,12 +2,12 @@ package chess;
 
 import java.util.ArrayList;
 
-public class Rook implements ChessPiece{
+public class Rook extends ChessPiece{
 
-	public String color;
-	
-	public Rook(String color) {
+	public Rook(String color, int row, int column) {
 		this.color = color;
+		this.row = row;
+		this.column = column;
 	}
 	
 	public ArrayList<String> getAvailableMoves(Chessboard chessboard) {

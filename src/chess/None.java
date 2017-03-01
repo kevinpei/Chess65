@@ -2,7 +2,7 @@ package chess;
 
 import java.util.ArrayList;
 
-public class None implements ChessPiece{
+public class None extends ChessPiece{
 	
 	String appearance;
 	

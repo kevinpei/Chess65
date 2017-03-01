@@ -2,12 +2,12 @@ package chess;
 
 import java.util.ArrayList;
 
-public class Bishop implements ChessPiece{
-
-	public String color;
+public class Bishop extends ChessPiece{
 	
-	public Bishop(String color) {
+	public Bishop(String color, int row, int column) {
 		this.color = color;
+		this.row = row;
+		this.column = column;
 	}
 	
 	public ArrayList<String> getAvailableMoves(Chessboard chessboard) {
