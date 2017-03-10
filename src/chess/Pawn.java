@@ -4,18 +4,14 @@ import java.util.ArrayList;
 
 public class Pawn extends ChessPiece{
 
-	public Pawn(String color, int row, int column) {
+	public Pawn(String color) {
 		this.color = color;
-		this.row = row;
-		this.column = column;
 	}
 	
 	public ArrayList<String> getAvailableMoves(Chessboard chessboard) {
 		ArrayList<String> availableMoves = new ArrayList<String>();
-		ChessPiece[][] board = chessboard.getBoard();
+		ChessSquare[][] board = chessboard.getBoard();
 		if (color == "b") {
-			if (row == 1) {
-			}
 		}
 		return null;
 	}

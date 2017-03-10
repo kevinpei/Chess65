@@ -4,15 +4,13 @@ import java.util.ArrayList;
 
 public class Queen extends ChessPiece{
 
-	public Queen(String color, int row, int column) {
+	public Queen(String color) {
 		this.color = color;
-		this.row = row;
-		this.column = column;
 	}
 	
 	public ArrayList<String> getAvailableMoves(Chessboard chessboard) {
 		ArrayList<String> availableMoves = new ArrayList<String>();
-		ChessPiece[][] board = chessboard.getBoard();
+		ChessSquare[][] board = chessboard.getBoard();
 		for (int i = 0; i < 8; i++) {
 			
 		}
