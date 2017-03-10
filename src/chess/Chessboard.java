@@ -1,9 +1,12 @@
 package chess;
 
 public class Chessboard {
+	//A Chessboard is represented as an 8 x 8 array of chess squares
 	ChessSquare[][] chessboard = new ChessSquare[8][8];
+	//Tells whether white is going, in which case it is true
 	boolean whiteIsGoing;
 	
+	//This function initializes a given side's non-pawn pieces
 	public void initializeSide(int row, String color) {
 		this.chessboard[row][0] = new ChessSquare(new Rook(color), row, 0);
 		this.chessboard[row][1] = new ChessSquare(new Knight(color), row, 1);
@@ -15,28 +18,37 @@ public class Chessboard {
 		this.chessboard[row][7] = new ChessSquare(new Rook(color), row, 7);
 	}
 	
+	//This is the constructor. It automatically populates the chessboard with ChessSquares
 	public Chessboard() {
+		//Initializes the black side's non-pawn pieces
 		initializeSide(0, "b");
+		//Initializes the black side's pawns
 		for (int i = 0; i < 8; i++) {
 			this.chessboard[1][i] = new ChessSquare(new Pawn("b"), 1, i);
 		}
+		//Initializes the middle unoccupied squares
 		for (int i = 2; i < 6; i++) {
 			for (int j = 0; j < 8; j++) {
 				this.chessboard[i][j] = new ChessSquare(null, i, j);
 			}
 		}
+		//Initializes the white side's pawns
 		for (int i = 0; i < 8; i++) {
 			this.chessboard[6][i] = new ChessSquare(new Pawn("w"), 6, i);
 		}
+		//Initializes the white side's non-pawn pieces
 		initializeSide(7, "w");
 		whiteIsGoing = true;
 	}
 	
+	//Converts the chessboard into a string representation
 	public String toString() {
 		String output = new String();
+		//Adds whatever's on each ChessSquare to the output string
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				output += this.chessboard[i][j];
+				//After it reaches the 8th column, it adds a new line character
 				if (j == 7) {
 					output += "\n";
 				}
@@ -45,6 +57,8 @@ public class Chessboard {
 		return output;
 	}
 	
+	
+	//This function returns the ChessSquare[][] chessboard
 	public ChessSquare[][] getBoard() {
 		return this.chessboard;
 	}
