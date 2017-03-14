@@ -4,25 +4,14 @@ import java.util.ArrayList;
 
 public class King extends ChessPiece{
 
-	public King(String color) {
-		this.color = color;
+	public King(String color, Chessboard board, int row, int column) {
+		super(color, board, row, column);
 	}
 	
-	public ArrayList<String> getAvailableMoves(Chessboard chessboard) {
-		ArrayList<String> availableMoves = new ArrayList<String>();
-		ChessSquare[][] board = chessboard.getBoard();
-		for (int i = 0; i < 8; i++) {
-			
-		}
+	public ArrayList<String> getAvailableMoves() {
 		return null;
 	}
-
-	@Override
-	public String move(String destination) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	public String toString() {
 		return color + "K";
 	}

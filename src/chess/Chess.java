@@ -12,7 +12,11 @@ public class Chess {
 		Scanner sc = new Scanner(System.in);
 		Chessboard board = new Chessboard();
 		System.out.println(board);
-		String move = sc.next();
+		ArrayList<String> test = board.getSquare(4, 4).getPiece().getAvailableMoves();
+		
+		for (int i = 0; i< test.size(); i++) {
+			System.out.println(test.get(i));
+		}
 	}
 	
 }

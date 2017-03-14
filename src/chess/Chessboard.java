@@ -8,14 +8,15 @@ public class Chessboard {
 	
 	//This function initializes a given side's non-pawn pieces
 	public void initializeSide(int row, String color) {
-		this.chessboard[row][0] = new ChessSquare(new Rook(color), row, 0);
-		this.chessboard[row][1] = new ChessSquare(new Knight(color), row, 1);
-		this.chessboard[row][2] = new ChessSquare(new Bishop(color), row, 2);
-		this.chessboard[row][3] = new ChessSquare(new Queen(color), row, 3);
-		this.chessboard[row][4] = new ChessSquare(new King(color), row, 4);
-		this.chessboard[row][5] = new ChessSquare(new Bishop(color), row, 5);
-		this.chessboard[row][6] = new ChessSquare(new Knight(color), row, 6);
-		this.chessboard[row][7] = new ChessSquare(new Rook(color), row, 7);
+		this.chessboard[4][4] = new ChessSquare(new Rook(color, this, 4, 4), 4, 4);
+		this.chessboard[row][0] = new ChessSquare(new Rook(color, this, row, 0), row, 0);
+		this.chessboard[row][1] = new ChessSquare(new Knight(color, this, row, 1), row, 1);
+		this.chessboard[row][2] = new ChessSquare(new Bishop(color, this, row, 2), row, 2);
+		this.chessboard[row][3] = new ChessSquare(new Queen(color, this, row, 3), row, 3);
+		this.chessboard[row][4] = new ChessSquare(new King(color, this, row, 4), row, 4);
+		this.chessboard[row][5] = new ChessSquare(new Bishop(color, this, row, 5), row, 5);
+		this.chessboard[row][6] = new ChessSquare(new Knight(color, this, row, 6), row, 6);
+		this.chessboard[row][7] = new ChessSquare(new Rook(color, this, row, 7), row, 7);
 	}
 	
 	//This is the constructor. It automatically populates the chessboard with ChessSquares
@@ -24,7 +25,7 @@ public class Chessboard {
 		initializeSide(0, "b");
 		//Initializes the black side's pawns
 		for (int i = 0; i < 8; i++) {
-			this.chessboard[1][i] = new ChessSquare(new Pawn("b"), 1, i);
+			this.chessboard[1][i] = new ChessSquare(new Pawn("b", this, 1, i), 1, i);
 		}
 		//Initializes the middle unoccupied squares
 		for (int i = 2; i < 6; i++) {
@@ -34,7 +35,7 @@ public class Chessboard {
 		}
 		//Initializes the white side's pawns
 		for (int i = 0; i < 8; i++) {
-			this.chessboard[6][i] = new ChessSquare(new Pawn("w"), 6, i);
+			this.chessboard[6][i] = new ChessSquare(new Pawn("w", this, 6, i), 6, i);
 		}
 		//Initializes the white side's non-pawn pieces
 		initializeSide(7, "w");
@@ -61,6 +62,10 @@ public class Chessboard {
 	//This function returns the ChessSquare[][] chessboard
 	public ChessSquare[][] getBoard() {
 		return this.chessboard;
+	}
+	
+	public ChessSquare getSquare(int i, int j) {
+		return this.chessboard[i][j];
 	}
 	
 }
