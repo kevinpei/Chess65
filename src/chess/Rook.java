@@ -10,22 +10,26 @@ public class Rook extends ChessPiece{
 	
 	public ArrayList<String> getAvailableMoves() {
 		ArrayList<String> possibleMoves = new ArrayList<String>();
-		System.out.println("FUCK");
 		/*
-		 * This following code blocks tests all squares above the rook.
+		 * This following code block tests all squares above the rook.
 		 * It tests each square above the rook one at a time. If it is empty,
 		 * then the square is a possible move. If it is occupied, that means
 		 * that both it and every square above it is not a valid move, thus
-		 * why i is set to 0.
+		 * why i is set to -1.
 		 */
 		for (int i = this.column - 1; i >= 0; i--) {
-			System.out.println(i);
-			System.out.println("testing " + this.board.getSquare(this.row, i).getPosition());
 			if (this.board.getSquare(this.row, i).getPiece() != null) {
-				System.out.println("Oopsie");
-				i = 0;
+				/*
+				 * If the space is occupied by a piece of the opposite color, then it is possible to
+				 * move there by capturing that piece. However, further movement beyond that piece is still
+				 * impossible.
+				 */
+				if (!(this.board.getSquare(this.row, i).getPiece().color.equals
+						(this.board.getSquare(this.row, this.column).getPiece().color))) {
+					possibleMoves.add(this.board.getSquare(this.row, i).getPosition());
+				}
+				i = -1;
 			} else {
-				System.out.println("Working");
 				possibleMoves.add(this.board.getSquare(this.row, i).getPosition());
 			}
 		}
@@ -33,13 +37,13 @@ public class Rook extends ChessPiece{
 		 * It is the same idea for this one, except moving downward instead of upward.
 		 */
 		for (int i = this.column + 1; i < 8; i++) {
-			System.out.println(i);
-			System.out.println("testing " + this.board.getSquare(this.row, i).getPosition());
 			if (this.board.getSquare(this.row, i).getPiece() != null) {
-				System.out.println("Oopsie");
+				if (!(this.board.getSquare(this.row, i).getPiece().color.equals
+						(this.board.getSquare(this.row, this.column).getPiece().color))) {
+					possibleMoves.add(this.board.getSquare(this.row, i).getPosition());
+				}
 				i = 8;
 			} else {
-				System.out.println("Working");
 				possibleMoves.add(this.board.getSquare(this.row, i).getPosition());
 			}
 		}
@@ -47,12 +51,13 @@ public class Rook extends ChessPiece{
 		 * Likewise, this checks all moves to the left of the rook.
 		 */
 		for (int i = this.row - 1; i >= 0; i--) {
-			System.out.println("testing " + this.board.getSquare(i, this.column).getPosition());
 			if (this.board.getSquare(i, this.column).getPiece() != null) {
-				System.out.println("Oopsie");
-				i = 0;
+				if (!(this.board.getSquare(i, this.column).getPiece().color.equals
+						(this.board.getSquare(this.row, this.column).getPiece().color))) {
+					possibleMoves.add(this.board.getSquare(i, this.column).getPosition());
+				}
+				i = -1;
 			} else {
-				System.out.println("Working");
 				possibleMoves.add(this.board.getSquare(i, this.column).getPosition());
 			}
 		}
@@ -60,12 +65,13 @@ public class Rook extends ChessPiece{
 		 * Likewise, this checks all moves to the right of the rook.
 		 */
 		for (int i = this.row + 1; i < 8; i++) {
-			System.out.println("testing " + this.board.getSquare(i, this.column).getPosition());
 			if (this.board.getSquare(i, this.column).getPiece() != null) {
-				System.out.println("Oopsie");
+				if (!(this.board.getSquare(i, this.column).getPiece().color.equals
+						(this.board.getSquare(this.row, this.column).getPiece().color))) {
+					possibleMoves.add(this.board.getSquare(i, this.column).getPosition());
+				}
 				i = 8;
 			} else {
-				System.out.println("Working");
 				possibleMoves.add(this.board.getSquare(i, this.column).getPosition());
 			}
 		}
