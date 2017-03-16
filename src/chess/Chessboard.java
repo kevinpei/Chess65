@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.ArrayList;
+
 public class Chessboard {
 	//A Chessboard is represented as an 8 x 8 array of chess squares
 	ChessSquare[][] chessboard = new ChessSquare[8][8];
@@ -58,6 +60,24 @@ public class Chessboard {
 		return output;
 	}
 	
+	/*
+	 * This function returns all possible moves of every piece of a given color. This is used
+	 * to determine whether a king is in checkmate and whether a given move will move it into check.
+	 * It is also used to determine if there is a stalemate.
+	 */
+	public ArrayList<String> getColorAvailablemoves(String color) {
+		ArrayList<String> allPieceMoves = new ArrayList<String>();
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (chessboard[i][j].currentPiece != null) {
+					if (chessboard[i][j].currentPiece.color.equals(color)) {
+						allPieceMoves.addAll(chessboard[i][j].currentPiece.getAvailableMoves());
+					}
+				}
+			}
+		}
+		return allPieceMoves;
+	}
 	
 	//This function returns the ChessSquare[][] chessboard
 	public ChessSquare[][] getBoard() {
