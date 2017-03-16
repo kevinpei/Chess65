@@ -26,8 +26,9 @@ public class Bishop extends ChessPiece{
 			 * diagonal movement. j in this case is being subtracted from row to indicate upward
 			 * movement.
 			 */
-			while (this.row - j >= 0) {
-				j++;
+			j++;
+			if (this.row - j >= 0) {
+				System.out.println("Testing " + (this.row - j) + ", " + i );
 				if (this.board.getSquare(this.row - j, i).getPiece() != null) {
 					/*
 					 * If the space is occupied by a piece of the opposite color, then it is possible to
@@ -50,8 +51,8 @@ public class Bishop extends ChessPiece{
 		 * This code block does the same above for diagonally upwards and to the right.
 		 */
 		for (int i = this.column + 1; i < 8; i++) {
-			while (this.row - j >= 0) {
-				j++;
+			j++;
+			if (this.row - j >= 0) {
 				if (this.board.getSquare(this.row - j, i).getPiece() != null) {
 					if (!(this.board.getSquare(this.row - j, i).getPiece().color.equals
 							(this.board.getSquare(this.row, this.column).getPiece().color))) {
@@ -68,8 +69,8 @@ public class Bishop extends ChessPiece{
 		 * This code block does the same above for diagonally downwards and to the right.
 		 */
 		for (int i = this.column + 1; i < 8; i++) {
-			while (this.row + j < 8) {
-				j++;
+			j++;
+			if (this.row + j < 8) {
 				if (this.board.getSquare(this.row + j, i).getPiece() != null) {
 					if (!(this.board.getSquare(this.row + j, i).getPiece().color.equals
 							(this.board.getSquare(this.row, this.column).getPiece().color))) {
@@ -86,8 +87,8 @@ public class Bishop extends ChessPiece{
 		 * This code block does the same above for diagonally downwards and to the left.
 		 */
 		for (int i = this.column - 1; i >= 0; i--) {
-			while (this.row + j < 8) {
-				j++;
+			j++;
+			if (this.row + j < 8) {
 				if (this.board.getSquare(this.row + j, i).getPiece() != null) {
 					if (!(this.board.getSquare(this.row + j, i).getPiece().color.equals
 							(this.board.getSquare(this.row, this.column).getPiece().color))) {
