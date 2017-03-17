@@ -10,7 +10,7 @@ public class Chessboard {
 	
 	//This function initializes a given side's non-pawn pieces
 	public void initializeSide(int row, String color) {
-		this.chessboard[4][4] = new ChessSquare(new Pawn(color, this, 4, 4), 4, 4);
+		this.chessboard[4][4] = new ChessSquare(new King(color, this, 4, 4), 4, 4);
 		this.chessboard[row][0] = new ChessSquare(new Rook(color, this, row, 0), row, 0);
 		this.chessboard[row][1] = new ChessSquare(new Knight(color, this, row, 1), row, 1);
 		this.chessboard[row][2] = new ChessSquare(new Bishop(color, this, row, 2), row, 2);
@@ -70,8 +70,7 @@ public class Chessboard {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (chessboard[i][j].currentPiece != null) {
-					if (chessboard[i][j].currentPiece.color.equals(color) && 
-							!(chessboard[i][j].currentPiece instanceof King)) {
+					if (chessboard[i][j].currentPiece.color.equals(color)) {
 						if (chessboard[i][j].currentPiece.getAvailableMoves() != null) {
 							allPieceMoves.addAll(chessboard[i][j].currentPiece.getAvailableMoves());
 						}

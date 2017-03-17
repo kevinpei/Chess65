@@ -28,28 +28,29 @@ public class King extends ChessPiece{
 		}
 	}
 	
+	/*
+	 * A king can move one square in any direction. 
+	 */
 	public ArrayList<String> getAvailableMoves() {
 		ArrayList<String> possibleMoves = new ArrayList<String>();
-		ArrayList<String> possibleEnemyMoves = new ArrayList<String>();
-		if (this.color.equals("b")) {
-			possibleEnemyMoves = this.board.getColorAvailablemoves("w");
-		} else {
-			possibleEnemyMoves = this.board.getColorAvailablemoves("b");
-		}
 		for (int i = -1; i < 2; i++) {
 			for (int j = -1; j < 2; j++) {
 				if (!(i == 0 && j == 0)) {
 					if (isValidSquare(this.row + i, this.column + j)) {
-						if (!(possibleEnemyMoves.contains(this.board.
-								getSquare(this.row + i, this.column + j).getPosition()))) {
-							possibleMoves.add(this.board.
-									getSquare(this.row + i,  this.column + j).getPosition());
-						}
+						possibleMoves.add(this.board.getSquare(this.row + i,  this.column + j).getPosition());
 					}
 				}
 			}
 		}
 		return possibleMoves;
+	}
+	
+	/*
+	 * This statement checks to see if the move will put the king in check. If it will, it returns false.
+	 * Otherwise, it returns true.
+	 */
+	public boolean move(String destination) {
+		return false;
 	}
 	
 	public String toString() {
