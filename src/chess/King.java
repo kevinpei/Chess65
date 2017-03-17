@@ -49,8 +49,23 @@ public class King extends ChessPiece{
 	 * This statement checks to see if the move will put the king in check. If it will, it returns false.
 	 * Otherwise, it returns true.
 	 */
-	public boolean move(String destination) {
-		return false;
+	public boolean isValidMove(String destination) {
+		if (super.isValidMove(destination)) {
+			ArrayList<String> possibleEnemyMoves = new ArrayList<String>();
+			if (this.color.equals("b")) {
+				possibleEnemyMoves = this.board.getColorAvailablemoves("w");
+			} else {
+				possibleEnemyMoves = this.board.getColorAvailablemoves("b");
+			}
+			for (String move: possibleEnemyMoves) {
+				if (this.getAvailableMoves().contains(move)){
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public String toString() {

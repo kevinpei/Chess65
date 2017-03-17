@@ -13,7 +13,7 @@ public abstract class ChessPiece {
 	// A method to get all of a piece's currently available moves.
 	public abstract ArrayList<String> getAvailableMoves();
 	// All ChessPieces will have the same move function, checking whether the given move is available.
-	public boolean move(String destination) {
+	public boolean isValidMove(String destination) {
 		ArrayList<String> moves = this.getAvailableMoves();
 		if (moves.contains(destination)){
 			return true;
