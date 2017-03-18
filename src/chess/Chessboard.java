@@ -65,7 +65,7 @@ public class Chessboard {
 	 * to determine whether a king is in checkmate and whether a given move will move it into check.
 	 * It is also used to determine if there is a stalemate.
 	 */
-	public ArrayList<String> getColorAvailablemoves(String color) {
+	public ArrayList<String> getColorAvailableMoves(String color) {
 		ArrayList<String> allPieceMoves = new ArrayList<String>();
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -73,6 +73,26 @@ public class Chessboard {
 					if (chessboard[i][j].currentPiece.color.equals(color)) {
 						if (chessboard[i][j].currentPiece.getAvailableMoves() != null) {
 							allPieceMoves.addAll(chessboard[i][j].currentPiece.getAvailableMoves());
+						}
+					}
+				}
+			}
+		}
+		return allPieceMoves;
+	}
+	
+	public ArrayList<String> getColorAvailableCaptures(String color) {
+		ArrayList<String> allPieceMoves = new ArrayList<String>();
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (chessboard[i][j].currentPiece != null) {
+					if (chessboard[i][j].currentPiece.color.equals(color)) {
+						if (chessboard[i][j].currentPiece.getAvailableMoves() != null) {
+							if (!(chessboard[i][j].currentPiece instanceof Pawn)) {
+								allPieceMoves.addAll(chessboard[i][j].currentPiece.getAvailableMoves());
+							} else if (chessboard[i][j].currentPiece instanceof Pawn) {
+								allPieceMoves.addAll(((Pawn) chessboard[i][j].currentPiece).getAvailableCaptures());
+							}
 						}
 					}
 				}

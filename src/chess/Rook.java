@@ -4,8 +4,15 @@ import java.util.ArrayList;
 
 public class Rook extends ChessPiece{
 
+	/*
+	 * The rook also includes a hasMoved variable because a rook can only castle if it has not
+	 * moved yet.
+	 */
+	public boolean hasMoved;
+	
 	public Rook(String color, Chessboard board, int row, int column) {
 		super(color, board, row, column);
+		hasMoved = false;
 	}
 	
 	public ArrayList<String> getAvailableMoves() {

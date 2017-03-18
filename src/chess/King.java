@@ -4,8 +4,15 @@ import java.util.ArrayList;
 
 public class King extends ChessPiece{
 
+	/*
+	 * The king also includes a hasMoved variable because a king can only castle if it has not
+	 * moved yet.
+	 */
+	public boolean hasMoved;
+	
 	public King(String color, Chessboard board, int row, int column) {
 		super(color, board, row, column);
+		hasMoved = false;
 	}
 	
 	/*
@@ -53,9 +60,9 @@ public class King extends ChessPiece{
 		if (super.isValidMove(destination)) {
 			ArrayList<String> possibleEnemyMoves = new ArrayList<String>();
 			if (this.color.equals("b")) {
-				possibleEnemyMoves = this.board.getColorAvailablemoves("w");
+				possibleEnemyMoves = this.board.getColorAvailableCaptures("w");
 			} else {
-				possibleEnemyMoves = this.board.getColorAvailablemoves("b");
+				possibleEnemyMoves = this.board.getColorAvailableCaptures("b");
 			}
 			for (String move: possibleEnemyMoves) {
 				if (this.getAvailableMoves().contains(move)){

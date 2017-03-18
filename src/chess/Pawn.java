@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class Pawn extends ChessPiece{
 
+	/*
+	 * The pawn also includes a hasMoved variable because the first move of pawn can be one or
+	 * two moves forward.
+	 */
 	public boolean hasMoved;
 	
 	
@@ -25,6 +29,11 @@ public class Pawn extends ChessPiece{
 		}
 	}
 	
+	/*
+	 * This method checks to see whether the pawn can diagonally capture a piece. If there is a piece
+	 * vertically and horizontally by the given amount of squares and it is of an opposite color, then
+	 * the pawn can capture it.
+	 */
 	public boolean isValidCapture(int verticalMovement, int horizontalMovement) {
 		if (this.board.getSquare(this.row + verticalMovement,  this.column + horizontalMovement)
 				.getPiece() != null) {
@@ -56,18 +65,11 @@ public class Pawn extends ChessPiece{
 					possibleMoves.add(this.board.getSquare(this.row + 2, this.column).getPosition());
 				}
 			}
-			hasMoved = true;
 		}
 		if (this.color.equals("w")) {
 			if (this.row > 0) {
 				if (isValidVerticalMovement(-1)) {
 					possibleMoves.add(this.board.getSquare(this.row - 1, this.column).getPosition());
-				}
-				if (isValidCapture(-1, -1)) {
-					possibleMoves.add(this.board.getSquare(this.row - 1, this.column - 1).getPosition());
-				}
-				if (isValidCapture(-1, 1)) {
-					possibleMoves.add(this.board.getSquare(this.row - 1, this.column + 1).getPosition());
 				}
 			}
 		} else {
@@ -75,15 +77,39 @@ public class Pawn extends ChessPiece{
 				if (isValidVerticalMovement(1)) {
 					possibleMoves.add(this.board.getSquare(this.row + 1, this.column).getPosition());
 				}
+			}
+		}
+		possibleMoves.addAll(this.getAvailableCaptures());
+		return possibleMoves;
+	}
+	
+	/*
+	 * This function returns an arraylist of all possible capturing moves for the pawn. This is a
+	 * separate function than getAvailableMoves() for determining check, because a pawn moving forward
+	 * does not capture that piece.
+	 */
+	public ArrayList<String> getAvailableCaptures() {
+		ArrayList<String> possibleCaptures = new ArrayList<String>();
+		if (this.color.equals("w")) {
+			if (this.row > 0) {
+				if (isValidCapture(-1, -1)) {
+					possibleCaptures.add(this.board.getSquare(this.row - 1, this.column - 1).getPosition());
+				}
+				if (isValidCapture(-1, 1)) {
+					possibleCaptures.add(this.board.getSquare(this.row - 1, this.column + 1).getPosition());
+				}
+			}
+		} else {
+			if (this.row < 7) {
 				if (isValidCapture(1, -1)) {
-					possibleMoves.add(this.board.getSquare(this.row + 1, this.column - 1).getPosition());
+					possibleCaptures.add(this.board.getSquare(this.row + 1, this.column - 1).getPosition());
 				}
 				if (isValidCapture(1, 1)) {
-					possibleMoves.add(this.board.getSquare(this.row + 1, this.column + 1).getPosition());
+					possibleCaptures.add(this.board.getSquare(this.row + 1, this.column + 1).getPosition());
 				}
 			}
 		}
-		return possibleMoves;
+		return possibleCaptures;
 	}
 
 	public String toString() {
