@@ -61,9 +61,8 @@ public class Chessboard {
 	}
 	
 	/*
-	 * This function returns all possible moves of every piece of a given color. This is used
-	 * to determine whether a king is in checkmate and whether a given move will move it into check.
-	 * It is also used to determine if there is a stalemate.
+	 * This function returns all possible moves of every piece of a given color.
+	 * It is used to determine if there is a stalemate.
 	 */
 	public ArrayList<String> getColorAvailableMoves(String color) {
 		ArrayList<String> allPieceMoves = new ArrayList<String>();
@@ -81,6 +80,10 @@ public class Chessboard {
 		return allPieceMoves;
 	}
 	
+	/*
+	 * This function returns all possible capturing moves of every piece of a given color. This is used
+	 * to determine whether a king is in checkmate and whether a given move will move it into check.
+	 */
 	public ArrayList<String> getColorAvailableCaptures(String color) {
 		ArrayList<String> allPieceMoves = new ArrayList<String>();
 		for (int i = 0; i < 8; i++) {
