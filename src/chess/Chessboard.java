@@ -1,7 +1,13 @@
 package chess;
 
+//import statements
 import java.util.ArrayList;
 
+/**
+ * @author Kevin Pei and Andrew Dos Reis
+ * @version 1.0
+ * @since 1.0
+ */
 public class Chessboard {
 	//A Chessboard is represented as an 8 x 8 array of chess squares
 	ChessSquare[][] chessboard = new ChessSquare[8][8];
@@ -10,7 +16,6 @@ public class Chessboard {
 	
 	//This function initializes a given side's non-pawn pieces
 	public void initializeSide(int row, String color) {
-		this.chessboard[4][4] = new ChessSquare(new King(color, this, 4, 4), 4, 4);
 		this.chessboard[row][0] = new ChessSquare(new Rook(color, this, row, 0), row, 0);
 		this.chessboard[row][1] = new ChessSquare(new Knight(color, this, row, 1), row, 1);
 		this.chessboard[row][2] = new ChessSquare(new Bishop(color, this, row, 2), row, 2);
@@ -41,6 +46,12 @@ public class Chessboard {
 		}
 		//Initializes the white side's non-pawn pieces
 		initializeSide(7, "w");
+		this.chessboard[4][4] = new ChessSquare(new Queen("w", this, 4, 4), 4, 4);
+		this.chessboard[4][5] = new ChessSquare(new Pawn("b", this, 4, 5), 4, 5);
+		this.chessboard[4][3] = new ChessSquare(new Pawn("b", this, 4, 3), 4, 3);
+		this.chessboard[3][4] = new ChessSquare(new Pawn("b", this, 3, 4), 3, 4);
+		this.chessboard[3][5] = new ChessSquare(new Pawn("b", this, 3, 5), 3, 5);
+		this.chessboard[3][3] = new ChessSquare(new Pawn("b", this, 3, 3), 3, 3);
 		whiteIsGoing = true;
 	}
 	
