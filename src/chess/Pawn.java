@@ -9,11 +9,12 @@ public class Pawn extends ChessPiece{
 	 * two moves forward.
 	 */
 	public boolean hasMoved;
-	
+	public boolean movedTwoSquares;
 	
 	public Pawn(String color, Chessboard board, int row, int column) {
 		super(color, board, row, column);
 		hasMoved = false;
+		movedTwoSquares = false;
 	}
 	
 	/*
@@ -46,6 +47,19 @@ public class Pawn extends ChessPiece{
 		} else {
 			return false;
 		}
+	}
+	
+	public boolean enPassant(int verticalMovement, int horizontalMovement) {
+		if (this.board.getSquare(this.row, this.column + horizontalMovement).getPiece() != null) {
+			if (this.board.getSquare(this.row,this.column + horizontalMovement).getPiece() instanceof Pawn) {
+				Pawn adjacentPiece = (Pawn) this.board.getSquare(this.row, 
+						this.column + horizontalMovement).getPiece();
+				if (adjacentPiece.movedTwoSquares) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	/*
@@ -98,6 +112,12 @@ public class Pawn extends ChessPiece{
 				if (isValidCapture(-1, 1)) {
 					possibleCaptures.add(this.board.getSquare(this.row - 1, this.column + 1).getPosition());
 				}
+				if (enPassant(-1, -1)) {
+					possibleCaptures.add(this.board.getSquare(this.row, this.column - 1).getPosition());
+				}
+				if (enPassant(-1, 1)) {
+					possibleCaptures.add(this.board.getSquare(this.row, this.column + 1).getPosition());
+				}
 			}
 		} else {
 			if (this.row < 7) {
@@ -106,6 +126,12 @@ public class Pawn extends ChessPiece{
 				}
 				if (isValidCapture(1, 1)) {
 					possibleCaptures.add(this.board.getSquare(this.row + 1, this.column + 1).getPosition());
+				}
+				if (enPassant(1, -1)) {
+					possibleCaptures.add(this.board.getSquare(this.row, this.column - 1).getPosition());
+				}
+				if (enPassant(1, 1)) {
+					possibleCaptures.add(this.board.getSquare(this.row, this.column + 1).getPosition());
 				}
 			}
 		}
