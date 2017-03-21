@@ -40,6 +40,20 @@ public class ChessSquare {
 		default: return null;
 		}
 	}
+
+	public int getRow() {
+		switch(row) {
+			case 0: return 8;
+			case 1: return 7;
+			case 2: return 6;
+			case 3: return 5;
+			case 4: return 4;
+			case 5: return 3;
+			case 6: return 2;
+			case 7: return 1;
+			default: return 0;
+		}
+	}
 	/*
 	 * This method gives the String representation of each ChessSquare, which is its
 	 * piece or its appearance if there is no piece on it.
@@ -57,6 +71,6 @@ public class ChessSquare {
 	}
 	
 	public String getPosition() {
-		return this.getColumn() + (this.row + 1);
+		return this.getColumn() + (this.getRow());
 	}
 }

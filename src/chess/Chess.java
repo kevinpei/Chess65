@@ -37,16 +37,18 @@ public class Chess {
             String destination = null;
             String promotion = null;
 		    boolean validMove = false;
+		    ArrayList<String> whiteKingMoves= new ArrayList<String>();
+            ArrayList<String> blackKingMoves= new ArrayList<String>();
 		    while(!validMove) {
                 String move = sc.nextLine();
-                System.out.println(move);
+                //System.out.println(move);
                 position = move.substring(0, 2);
                 destination = move.substring(3, 5);
                 if (move.length() == 7) {
                     promotion = move.substring(6);
                 }
-                System.out.println(position);
-                System.out.println(destination);
+                //System.out.println(position);
+                //System.out.println(destination);
                 String color;
                 if(whiteIsGoing){
                     color = "w";
@@ -54,7 +56,7 @@ public class Chess {
                     color = "b";
                 }if(board.getSquare(position).currentPiece != null){
                     if(board.getSquare(position).currentPiece.color.equals(color)){
-                        if(board.getSquare(position).currentPiece.getAvailableMoves().contains(destination)) {
+                        if(board.getSquare(position).currentPiece.isValidMove(destination)) {
                             if (board.getSquare(position).currentPiece instanceof Pawn && (board.getSquare(destination).row == 0 || board.getSquare(destination).row == 7)) {
                                 isPromoting = true;
                             }
@@ -89,31 +91,45 @@ public class Chess {
                 }
 		        isPromoting = false;
             }
-			if (whiteIsGoing) {
+			if (!whiteIsGoing) {
+		        whiteKingMoves = board.whiteKingLoc.currentPiece.getAvailableMoves();
                 if (board.getColorAvailableMoves("w").isEmpty()) {
 					System.out.println("Stalemate");
 					stalemate = true;
 				} else if (board.getColorAvailableCaptures("b").contains(board.whiteKingLoc.getPosition())) {
-				    if (board.whiteKingLoc.currentPiece.getAvailableMoves().isEmpty()) {
-				        checkMate = true;
-                        System.out.println("Checkmate!");
+				    for (String move : board.whiteKingLoc.currentPiece.getAvailableMoves()) {
+				        if (!board.whiteKingLoc.currentPiece.isValidMove(move)){
+				            whiteKingMoves.remove(move);
+                        }
 
                     }
-					System.out.println("Check");
-
+                    if(whiteKingMoves.isEmpty()) {
+				        checkMate = true;
+				        System.out.println("Checkmate");
+                    }
+                    else {
+                        System.out.println("Check");
+                    }
 				}
-
 			} else {
+                blackKingMoves = board.blackKingLoc.currentPiece.getAvailableMoves();
                 if (board.getColorAvailableMoves("b").isEmpty()) {
                     System.out.println("Stalemate");
                     stalemate = true;
                 } else if (board.getColorAvailableCaptures("w").contains(board.blackKingLoc.getPosition())) {
-                    if (board.blackKingLoc.currentPiece.getAvailableMoves().isEmpty()) {
-                        checkMate = true;
-                        System.out.println("Checkmate!");
+                    for (String move : board.blackKingLoc.currentPiece.getAvailableMoves()) {
+                        if (!board.blackKingLoc.currentPiece.isValidMove(move)){
+                            blackKingMoves.remove(move);
+                        }
 
                     }
-                    System.out.println("Check");
+                    if(blackKingMoves.isEmpty()) {
+                        checkMate = true;
+                        System.out.println("Checkmate");
+                    }
+                    else {
+                        System.out.println("Check");
+                    }
 
                 }
             }

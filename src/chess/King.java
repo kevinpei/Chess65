@@ -49,7 +49,7 @@ public class King extends ChessPiece{
 			for (int j = -1; j < 2; j++) {
 				if (!(i == 0 && j == 0)) {
 					if (isValidSquare(this.row + i, this.column + j)) {
-						possibleMoves.add(this.board.getSquare(this.row + i,  this.column + j).getPosition());
+                        possibleMoves.add(this.board.getSquare(this.row + i,  this.column + j).getPosition());
 					}
 				}
 			}
@@ -60,9 +60,10 @@ public class King extends ChessPiece{
         if (this.castling(-2)) {
 		    possibleMoves.add(this.board.getSquare(this.row, this.column - 2).getPosition());
         }
+		System.out.println(possibleMoves);
 		return possibleMoves;
 	}
-	
+
 	/*
 	 * This statement checks to see if the move will put the king in check. If it will, it returns false.
 	 * Otherwise, it returns true.
@@ -111,7 +112,6 @@ public class King extends ChessPiece{
     }
 
 	public void move(String command){
-	    super.move(command);
 	    if(this.column == 2 && !(this.hasMoved)) {
 	        this.board.getSquare(this.row, 3).currentPiece = this.board.getSquare(this.row, 0).currentPiece;
 	        this.board.getSquare(this.row, 3).currentPiece.column = 3;
@@ -121,7 +121,7 @@ public class King extends ChessPiece{
             this.board.getSquare(this.row, 5).currentPiece.column = 5;
             this.board.getSquare(this.row, 7).currentPiece = null;
         }
-	    if (this.color.equals('b')){
+	    if (this.color.equals("b")){
 	        this.board.blackKingLoc = this.board.getSquare(this.row,this.column);
         }else{
             this.board.whiteKingLoc = this.board.getSquare(this.row,this.column);

@@ -132,10 +132,19 @@ public class Chessboard {
 
 	public ChessSquare getSquare(String position) {
 		char columnChar = position.charAt(0);
-		System.out.println(columnChar);
-		int row = Character.getNumericValue(position.charAt(1));
-		row--;
-		System.out.println(row);
+		int rowChar = Character.getNumericValue(position.charAt(1));
+		int row;
+		switch(rowChar) {
+			case 8: row = 0; break;
+			case 7: row = 1; break;
+			case 6: row = 2; break;
+			case 5: row = 3; break;
+			case 4: row = 4; break;
+			case 3: row = 5; break;
+			case 2: row = 6; break;
+			case 1: row = 7; break;
+			default: row = -1; break;
+		}
 		int column;
 		switch(columnChar) {
 			case 'a': column = 0; break;
@@ -148,8 +157,7 @@ public class Chessboard {
 			case 'h': column = 7; break;
 			default: column = -1; break;
 		}
-		System.out.println(column);
-		if(column == -1){
+		if(column == -1 || row == -1){
 			return null;
 		}
 		return this.chessboard[row][column];

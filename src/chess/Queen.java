@@ -93,7 +93,7 @@ public class Queen extends ChessPiece{
 			 */
 			j++;
 			if (this.row - j >= 0) {
-				System.out.println("Testing " + (this.row - j) + ", " + i );
+				//System.out.println("Testing " + (this.row - j) + ", " + i );
 				if (this.board.getSquare(this.row - j, i).getPiece() != null) {
 					/*
 					 * If the space is occupied by a piece of the opposite color, then it is possible to
