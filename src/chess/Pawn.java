@@ -41,10 +41,13 @@ public class Pawn extends ChessPiece{
 	 * the pawn can capture it.
 	 */
 	public boolean isValidCapture(int verticalMovement, int horizontalMovement) {
-		if (this.board.getSquare(this.row + verticalMovement,  this.column + horizontalMovement)
-				.getPiece() != null) {
+		if (this.row + verticalMovement> 7 || this.row + verticalMovement < 0 || this.column + horizontalMovement > 7 || this.column + horizontalMovement < 0) {
+				return false;
+		}
+		else if (this.board.getSquare(this.row + verticalMovement,  this.column + horizontalMovement)
+				.currentPiece != null) {
 			if (!(this.board.getSquare(this.row + verticalMovement,  this.column + horizontalMovement)
-				.getPiece().color.equals(this.color))) {
+				.currentPiece.color.equals(this.color))) {
 				return true;
 			} else {
 				return false;
@@ -55,7 +58,10 @@ public class Pawn extends ChessPiece{
 	}
 	
 	public boolean enPassant(int verticalMovement, int horizontalMovement) {
-		if (this.board.getSquare(this.row, this.column + horizontalMovement).getPiece() != null) {
+		if (this.row + verticalMovement> 7 || this.row + verticalMovement < 0 || this.column + horizontalMovement > 7 || this.column + horizontalMovement < 0) {
+			return false;
+		}
+		else if (this.board.getSquare(this.row, this.column + horizontalMovement).getPiece() != null) {
 			if (this.board.getSquare(this.row,this.column + horizontalMovement).getPiece() instanceof Pawn) {
 				Pawn adjacentPiece = (Pawn) this.board.getSquare(this.row, 
 						this.column + horizontalMovement).getPiece();
@@ -141,6 +147,33 @@ public class Pawn extends ChessPiece{
 			}
 		}
 		return possibleCaptures;
+	}
+
+	public void move(String command) {
+		super.move(command);
+		if ((this.row == 4 && this.hasMoved == false) || (this.row == 5 && this.hasMoved == false)) {
+			this.movedTwoSquares = true;
+			if (this.color.equals("w")) {
+				this.board.enPassantLocationWhite = this.board.getSquare(this.row, this.column);
+			} else {
+				this.board.enPassantLocationBlack = this.board.getSquare(this.row, this.column);
+			}
+
+		}
+		this.hasMoved = true;
+		if (this.color.equals("w") && this.row == 0) {
+
+		}
+	}
+
+	public void promote(String piece) {
+		switch(piece) {
+			case "B": this.board.getSquare(this.row, this.column).currentPiece = new Bishop(this.color, this.board, this.row, this.column); return;
+			case "R": this.board.getSquare(this.row, this.column).currentPiece = new Rook(this.color, this.board, this.row, this.column); return;
+			case "N": this.board.getSquare(this.row, this.column).currentPiece = new Knight(this.color, this.board, this.row, this.column); return;
+			case "Q": this.board.getSquare(this.row, this.column).currentPiece = new Queen(this.color, this.board, this.row, this.column); return;
+			default: this.board.getSquare(this.row, this.column).currentPiece = new Queen(this.color, this.board, this.row, this.column); return;
+		}
 	}
 
 	public String toString() {

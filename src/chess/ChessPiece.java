@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Kevin Pei and Andrew Dos Reis
@@ -35,5 +36,29 @@ public abstract class ChessPiece {
 	}
 	// A method to convert the piece into its string representation.
 	public abstract String toString();
-	
+
+	public void move(String command){
+		char columnChar = command.charAt(0);
+		int row = Character.getNumericValue(command.charAt(1));
+		row--;
+		int column;
+		switch(columnChar) {
+			case 'a': column = 0; break;
+			case 'b': column = 1; break;
+			case 'c': column = 2; break;
+			case 'd': column = 3; break;
+			case 'e': column = 4; break;
+			case 'f': column = 5; break;
+			case 'g': column = 6; break;
+			case 'h': column = 7; break;
+			default: column = -1; break;
+		}
+		if(column == -1){
+			return;
+		}
+		this.board.getSquare(row,column).currentPiece = this;
+		this.board.getSquare(this.row, this.column).currentPiece = null;
+		this.row = row;
+		this.column = column;
+	}
 }

@@ -54,6 +54,12 @@ public class King extends ChessPiece{
 				}
 			}
 		}
+		if (this.castling(2)) {
+		    possibleMoves.add(this.board.getSquare(this.row, this.column + 2).getPosition());
+        }
+        if (this.castling(-2)) {
+		    possibleMoves.add(this.board.getSquare(this.row, this.column - 2).getPosition());
+        }
 		return possibleMoves;
 	}
 	
@@ -79,7 +85,50 @@ public class King extends ChessPiece{
 			return false;
 		}
 	}
-	
+
+	public Boolean castling(int horizontalMovement) {
+		if(this.hasMoved){return false;}
+		else{
+			if(horizontalMovement > 0){
+				if(this.board.getSquare(this.row,7).getPiece() instanceof Rook){
+				    Rook movementChecker = (Rook) this.board.getSquare(this.row, 7).currentPiece;
+					if(this.board.getSquare(this.row,6).getPiece() == null && this.board.getSquare(this.row,5).getPiece() == null && !(movementChecker.hasMoved)){
+						return true;
+					}
+				}
+			}if(horizontalMovement <0){
+				if(this.board.getSquare(this.row,0).getPiece() instanceof Rook){
+                    Rook movementChecker = (Rook) this.board.getSquare(this.row, 0).currentPiece;
+					if(this.board.getSquare(this.row,1).getPiece() == null && this.board.getSquare(this.row,2).getPiece() == null && this.board.getSquare(this.row,3).getPiece() == null
+                            && !(movementChecker.hasMoved)){
+						return true;
+					}
+				}
+			}
+		}
+
+        return false;
+    }
+
+	public void move(String command){
+	    super.move(command);
+	    if(this.column == 2 && !(this.hasMoved)) {
+	        this.board.getSquare(this.row, 3).currentPiece = this.board.getSquare(this.row, 0).currentPiece;
+	        this.board.getSquare(this.row, 3).currentPiece.column = 3;
+	        this.board.getSquare(this.row, 0).currentPiece = null;
+        } else if (this.column == 6 && !(this.hasMoved)){
+            this.board.getSquare(this.row, 5).currentPiece = this.board.getSquare(this.row, 7).currentPiece;
+            this.board.getSquare(this.row, 5).currentPiece.column = 5;
+            this.board.getSquare(this.row, 7).currentPiece = null;
+        }
+	    if (this.color.equals('b')){
+	        this.board.blackKingLoc = this.board.getSquare(this.row,this.column);
+        }else{
+            this.board.whiteKingLoc = this.board.getSquare(this.row,this.column);
+        }
+        this.hasMoved = true;
+    }
+
 	public String toString() {
 		return color + "K";
 	}

@@ -84,7 +84,13 @@ public class Rook extends ChessPiece{
 		}
 		return possibleMoves;
 	}
-	
+
+	public void move(String command) {
+		super.move(command);
+		this.hasMoved = true;
+	}
+
+
 	public String toString() {
 		return color + "R";
 	}

@@ -12,8 +12,12 @@ public class Chessboard {
 	//A Chessboard is represented as an 8 x 8 array of chess squares
 	ChessSquare[][] chessboard = new ChessSquare[8][8];
 	//Tells whether white is going, in which case it is true
-	boolean whiteIsGoing;
-	
+	ChessSquare whiteKingLoc;
+	ChessSquare blackKingLoc;
+	ChessSquare enPassantLocationWhite;
+	ChessSquare enPassantLocationBlack;
+
+
 	//This function initializes a given side's non-pawn pieces
 	public void initializeSide(int row, String color) {
 		this.chessboard[row][0] = new ChessSquare(new Rook(color, this, row, 0), row, 0);
@@ -30,6 +34,7 @@ public class Chessboard {
 	public Chessboard() {
 		//Initializes the black side's non-pawn pieces
 		initializeSide(0, "b");
+		this.blackKingLoc = this.getSquare(0,4);
 		//Initializes the black side's pawns
 		for (int i = 0; i < 8; i++) {
 			this.chessboard[1][i] = new ChessSquare(new Pawn("b", this, 1, i), 1, i);
@@ -46,13 +51,14 @@ public class Chessboard {
 		}
 		//Initializes the white side's non-pawn pieces
 		initializeSide(7, "w");
-		this.chessboard[4][4] = new ChessSquare(new Queen("w", this, 4, 4), 4, 4);
+		this.whiteKingLoc = this.getSquare(7,4);
+		/*this.chessboard[4][4] = new ChessSquare(new Queen("w", this, 4, 4), 4, 4);
 		this.chessboard[4][5] = new ChessSquare(new Pawn("b", this, 4, 5), 4, 5);
 		this.chessboard[4][3] = new ChessSquare(new Pawn("b", this, 4, 3), 4, 3);
 		this.chessboard[3][4] = new ChessSquare(new Pawn("b", this, 3, 4), 3, 4);
 		this.chessboard[3][5] = new ChessSquare(new Pawn("b", this, 3, 5), 3, 5);
 		this.chessboard[3][3] = new ChessSquare(new Pawn("b", this, 3, 3), 3, 3);
-		whiteIsGoing = true;
+		*/
 	}
 	
 	//Converts the chessboard into a string representation
@@ -123,5 +129,29 @@ public class Chessboard {
 	public ChessSquare getSquare(int i, int j) {
 		return this.chessboard[i][j];
 	}
-	
+
+	public ChessSquare getSquare(String position) {
+		char columnChar = position.charAt(0);
+		System.out.println(columnChar);
+		int row = Character.getNumericValue(position.charAt(1));
+		row--;
+		System.out.println(row);
+		int column;
+		switch(columnChar) {
+			case 'a': column = 0; break;
+			case 'b': column = 1; break;
+			case 'c': column = 2; break;
+			case 'd': column = 3; break;
+			case 'e': column = 4; break;
+			case 'f': column = 5; break;
+			case 'g': column = 6; break;
+			case 'h': column = 7; break;
+			default: column = -1; break;
+		}
+		System.out.println(column);
+		if(column == -1){
+			return null;
+		}
+		return this.chessboard[row][column];
+	}
 }
