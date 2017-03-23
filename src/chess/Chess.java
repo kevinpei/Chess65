@@ -15,6 +15,15 @@ import java.util.Scanner;
  */
 public class Chess {
 
+	/**
+	 * Used to determine if the given command is valid.
+	 * <p>
+	 * The given command must consist of a valid character column and digit row. If it does not follow this
+	 * format or it is not within the board, then return false. Otherwise return true.
+	 * 
+	 * @param command Description: The string that's being tested for validity.
+	 * @return Description: Returns true if the command is valid and false otherwise.
+	 */
 	public static boolean isValid(String command) {
 		if (command.charAt(0) == 'a' || command.charAt(0) == 'b' || command.charAt(0) == 'c' 
 				|| command.charAt(0) == 'd' || command.charAt(0) == 'e' || command.charAt(0) == 'f' 
@@ -29,7 +38,7 @@ public class Chess {
 		}
 		return false;
 	}
-
+	
 	public static void main(String[] args) {
 		boolean checkMate = false;
 		boolean stalemate = false;

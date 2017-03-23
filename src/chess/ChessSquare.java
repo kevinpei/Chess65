@@ -6,9 +6,22 @@ public class ChessSquare {
 	 * a piece and is identified by its row and column. It has a default appearance if there
 	 * is no piece currently on the board, which alternates "  " and "##".
 	 */
+	/**
+	 * Holds the current ChessPiece on this ChessSquare. Is null if there is no piece on it.
+	 */
 	public ChessPiece currentPiece = null;
+	/**
+	 * Holds the row of this ChessSquare.
+	 */
 	public int row;
+	/**
+	 * Holds the column of this ChessSquare.
+	 */
 	public int column;
+	/**
+	 * ChessSquares alternate appearance as "  " and "##" if empty. This variable holds which appearance 
+	 * it should have if it has no ChessPiece on it.
+	 */
 	String appearance;
 
 	/**

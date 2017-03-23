@@ -37,11 +37,12 @@ public class Pawn extends ChessPiece{
 	}
 	/**
 	 * Determines whether a vertical movement is valid for the selected Pawn piece
-	 *
+	 *<p>
 	 * This method checks to see whether the pawn can move vertically the given amount of squares.
 	 * Usually it will be -1 for white pawns and 1 for black pawns, but it can also be -2 or 2 for
 	 * the first move. If the piece is still at start, the both 1 and 2 (absolute value) space movements will return true, after being moved only 1 space movements will return true for Pawns.
 	 *
+	 * @param verticalMovement Description: How far vertically to check whether the move is valid.
 	 * @return Description: boolean describing whether a vertical movement is a valid option from the selected pieces current position
 	 */
 	public boolean isValidVerticalMovement(int verticalMovement) {
@@ -54,11 +55,13 @@ public class Pawn extends ChessPiece{
 	
 	/**
 	 * Determines whether a move, specifically a capture, is valid for the selected Pawn piece
-	 *
+	 *<p>
 	 * This method checks to see whether the pawn can diagonally capture a piece. If there is a piece
 	 * vertically and horizontally by the given amount of squares and it is of an opposite color, then
 	 * the pawn can capture it.
 	 *
+	 * @param verticalMovement Description: How far vertically to check whether the capture is valid.
+	 * @param horizontalMovement Description: How far horizontally to check whether the capture is valid.
 	 * @return Description: boolean describing whether a capture is a valid option from the selected pieces current position
 	 */
 	public boolean isValidCapture(int verticalMovement, int horizontalMovement) {
@@ -78,10 +81,12 @@ public class Pawn extends ChessPiece{
 		}
 	}
 	/**
-	 * Determines whether a enpassant rule is in effect and usable
+	 * Determines whether a en Passant rule is in effect and usable
+	 *<p>
+	 * This method checks to see whether the pawn is in the position to use en Passant rule to capture another pawn piece from the enemy
 	 *
-	 * This method checks to see whether the pawn is in the position to use enpassant rule to capture another pawn piece from the enemy
-	 *
+	 * @param verticalMovement Description: How far vertically to check whether en Passant is valid.
+	 * @param horizontalMovement Description: How far horizontally to check whether en Passant is valid.
 	 * @return Description: boolean describing whether the enpassant rule is valid for the current piece
 	 */
 	public boolean enPassant(int verticalMovement, int horizontalMovement) {

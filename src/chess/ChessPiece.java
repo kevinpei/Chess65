@@ -14,12 +14,35 @@ import java.util.HashMap;
  */
 public abstract class ChessPiece {
 	// All ChessPieces will have a color ("b" or "w") and the board they're on
+	/**
+	 * A String which holds the color of the ChessPiece object. Can be either "b" or "w".
+	 */
 	public String color;
+	/**
+	 * A Chessboard object which holds the Chessboard the ChessPiece is currently on.
+	 */
 	public Chessboard board;
-	public int row, column;
-	// A method to get all of a piece's currently available moves.
+	/**
+	 * The current row of the ChessPiece. Used to determine its position in the Chessboard.
+	 */
+	public int row;
+	/**
+	 * The current column of the ChessPiece. Used to determine its position in the Chessboard.
+	 */
+	public int column;
+	/**
+	 * A method to get all of a piece's currently available moves.
+	 * @return Description: Returns an ArrayList containing all possible moves in chess move form (e.g. e8)
+	 */
 	public abstract ArrayList<String> getAvailableMoves();
-	// All ChessPieces will have the same move function, checking whether the given move is available.
+	/**
+	 * A function to check if a move is valid
+	 * <p>
+	 * This function checks whether the given move is available by checking to see if it's in its
+	 * getAvailableMoves() ArrayList.
+	 * @param destination Description: String representation of the chess move to check (e.g. e8).
+	 * @return Description: Returns true if the move is valid and false otherwise.
+	 */
 	public boolean isValidMove(String destination) {
 		ArrayList<String> moves = this.getAvailableMoves();
 		if (moves.contains(destination)){
@@ -50,8 +73,11 @@ public abstract class ChessPiece {
 	public abstract String toString();
 
 	/**
+	 * Moves the ChessPiece to the given location.
+	 * <p>
 	 * Generic move method that takes the implicit Chess Piece and moves it to the given location
 	 * It checks to make sure it is valid to move to that place
+	 * 
 	 * @param command Description: String form of a location to send the Chess Piece
 	 */
 	public void move(String command) {

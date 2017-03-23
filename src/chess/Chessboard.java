@@ -10,11 +10,28 @@ import java.util.ArrayList;
  */
 public class Chessboard {
 	//A Chessboard is represented as an 8 x 8 array of chess squares
+	/**
+	 * A 2-dimensional array of ChessSquares which represents the entire chess board.
+	 */
 	ChessSquare[][] chessboard = new ChessSquare[8][8];
 	//Tells whether white is going, in which case it is true
+	/**
+	 * Holds the ChessSquare which contains the white king. Used to determine check and checkmate.
+	 */
 	ChessSquare whiteKingLoc;
+	/**
+	 * Holds the ChessSquare which contains the black king. Used to determine check and checkmate.
+	 */
 	ChessSquare blackKingLoc;
+	/**
+	 * Holds the ChessSquare which contains a white pawn which just moved two spaces forwards. used to determine if
+	 * an en Passant move is valid.
+	 */
 	ChessSquare enPassantLocationWhite;
+	/**
+	 * Holds the ChessSquare which contains a black pawn which just moved two spaces forwards. used to determine if
+	 * an en Passant move is valid.
+	 */
 	ChessSquare enPassantLocationBlack;
 
 
@@ -36,8 +53,8 @@ public class Chessboard {
 		this.chessboard[row][7] = new ChessSquare(new Rook(color, this, row, 7), row, 7);
 	}
 
-	/**This is the constructor. It automatically populates the chessboard with ChessSquares for either side, and prepares the chess game to be played
-	 *
+	/**
+	 * This is the constructor. It automatically populates the chessboard with ChessSquares for either side, and prepares the chess game to be played
 	 */
 	public Chessboard() {
 		//Initializes the black side's non-pawn pieces
@@ -148,10 +165,29 @@ public class Chessboard {
 		return this.chessboard;
 	}
 	
+	/**
+	 * This function returns a ChessSquare.
+	 * <p>
+	 * It returns the ChessSquare with row i and column j in the two dimensional array of the chessboard.
+	 * 
+	 * @param i Description: The row of the ChessSquare being requested.
+	 * @param j Description: The column of the ChessSquare being requested.
+	 * @return Description: Returns the ChessSquare with row i and column j.
+	 */
 	public ChessSquare getSquare(int i, int j) {
 		return this.chessboard[i][j];
 	}
 
+	/**
+	 * This function returns a ChessSquare.
+	 * <p>
+	 * Because ChessSquares are stored in a two-dimensional array, there must be a way to translate a chess
+	 * move (e.g. e8) into a ChessSquare. This function can take a chess move as an input and return the
+	 * appropriate ChessSquare.
+	 * 
+	 * @param position Description: The chess move to be translated.
+	 * @return Description: Returns the ChessSquare corresponding to that chess move.
+	 */
 	public ChessSquare getSquare(String position) {
 		char columnChar = position.charAt(0);
 		int rowChar = Character.getNumericValue(position.charAt(1));
