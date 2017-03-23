@@ -90,7 +90,6 @@ public class King extends ChessPiece{
         if (this.castling(-2)) {
 		    possibleMoves.add(this.board.getSquare(this.row, this.column - 2).getPosition());
         }
-		System.out.println(possibleMoves);
 		return possibleMoves;
 	}
 
