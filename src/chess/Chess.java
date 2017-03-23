@@ -59,7 +59,14 @@ public class Chess {
 		    ArrayList<String> whiteKingMoves= new ArrayList<String>();
             ArrayList<String> blackKingMoves= new ArrayList<String>();
 		    while(!validMove) {
+		    	promotion = null;
+		    	if (whiteIsGoing) {
+		    		System.out.print("White's move: ");
+		    	} else {
+		    		System.out.print("Black's move: ");
+		    	}
                 String move = sc.nextLine();
+                System.out.println();
                 if (move.equals("resign")) {
                 	if (whiteIsGoing) {
                 		System.out.println("Black wins");
@@ -82,7 +89,8 @@ public class Chess {
                         promotion = move.substring(6);
                     }
                     if (!isValid(position) || !isValid(destination) || move.charAt(2) != ' ') {
-                    	System.out.println("Invalid move");
+                    	System.out.println("Illegal move, try again");
+                    	System.out.println();
                     } else {
                     	if (promotion != null) {
                     		if (promotion.equals("draw?")) {
@@ -104,24 +112,29 @@ public class Chess {
                                         if (board.getSquare(position).currentPiece instanceof Pawn && (board.getSquare(destination).row == 0 || board.getSquare(destination).row == 7)) {
                                             validMove = true;
                                         } else {
-                                            System.out.println("Invalid move");
+                                        	System.out.println("Illegal move, try again");
+                                        	System.out.println();
                                         }
                                     } else {
                                         validMove = true;
                                     }
                                 }else{
-                                    System.out.println("Invalid move");
+                                	System.out.println("Illegal move, try again");
+                                	System.out.println();
                                 }
                             }
                             else{
-                                System.out.println("Invalid move");
+                            	System.out.println("Illegal move, try again");
+                            	System.out.println();
                             }
                         }else{
-                            System.out.println("Invalid move");
+                        	System.out.println("Illegal move, try again");
+                        	System.out.println();
                         }
                     }
                 } else {
-                	System.out.println("Invalid move");
+                	System.out.println("Illegal move, try again");
+                	System.out.println();
                 }
             }
 			board.getSquare(position).currentPiece.move(destination);
@@ -138,8 +151,11 @@ public class Chess {
 		        whiteKingMoves = board.whiteKingLoc.currentPiece.getAvailableMoves();
                 if (board.getColorAvailableMoves("w").isEmpty()) {
                 	System.out.println(board);
+                	System.out.println();
 					System.out.println("Stalemate");
+					System.out.println();
 					System.out.println("Draw");
+					System.out.println();
 					stalemate = true;
 				} else if (board.getColorAvailableCaptures("b").contains(board.whiteKingLoc.getPosition())) {
 				    for (String move : board.whiteKingLoc.currentPiece.getAvailableMoves()) {
@@ -151,19 +167,26 @@ public class Chess {
                     if(whiteKingMoves.isEmpty()) {
 				        checkMate = true;
 				        System.out.println(board);
+				        System.out.println();
 				        System.out.println("Checkmate");
+				        System.out.println();
 				        System.out.println("Black wins");
+				        System.out.println();
                     }
                     else {
                         System.out.println("Check");
+                        System.out.println();
                     }
 				}
 			} else {
                 blackKingMoves = board.blackKingLoc.currentPiece.getAvailableMoves();
                 if (board.getColorAvailableMoves("b").isEmpty()) {
                 	System.out.println(board);
+                	System.out.println();
                     System.out.println("Stalemate");
+                    System.out.println();
                     System.out.println("Draw");
+                    System.out.println();
                     stalemate = true;
                 } else if (board.getColorAvailableCaptures("w").contains(board.blackKingLoc.getPosition())) {
                     for (String move : board.blackKingLoc.currentPiece.getAvailableMoves()) {
@@ -175,11 +198,15 @@ public class Chess {
                     if(blackKingMoves.isEmpty()) {
                         checkMate = true;
                         System.out.println(board);
+                        System.out.println();
                         System.out.println("Checkmate");
+                        System.out.println();
                         System.out.println("White wins");
+                        System.out.println();
                     }
                     else {
                         System.out.println("Check");
+                        System.out.println();
                     }
                 }
             }

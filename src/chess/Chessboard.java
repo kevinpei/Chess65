@@ -20,8 +20,7 @@ public class Chessboard {
 
 	/**This function initializes a given side's non-pawn pieces
 	 * <p>
-	 *     places a row of non-pawn pieces on the specified row of the board, all of the given color
-	 * </p>
+	 * This function places a row of non-pawn pieces on the specified row of the board, all of the given color
 	 *
 	 * @param row Description: the row on which each of a color's non-pawn pieces will be placed
 	 * @param color Description: the color of which all of the pieces will be made on the specified row
