@@ -9,23 +9,40 @@ import java.util.ArrayList;
  */
 public class Pawn extends ChessPiece{
 
-	/*
+	/**
 	 * The pawn also includes a hasMoved variable because the first move of pawn can be one or
 	 * two moves forward.
 	 */
 	public boolean hasMoved;
+	/**
+	 * The pawn also includes a hasMoved variable because the first move of pawn can be one or
+	 * two moves forward.
+	 */
 	public boolean movedTwoSquares;
-	
+
+	/**
+	 * Pawn constructor
+	 * <p>
+	 * The constructor for Pawn calls the ChessPiece super constructor.
+	 *
+	 * @param color Description: The color of the Pawn. Can be w or b for white and black.
+	 * @param board Description: The chessboard the Pawn is located in.
+	 * @param row Description: The row the Pawn starts on in the chessboard.
+	 * @param column Description: The column the Pawn starts on in the chessboard.
+	 */
 	public Pawn(String color, Chessboard board, int row, int column) {
 		super(color, board, row, column);
 		hasMoved = false;
 		movedTwoSquares = false;
 	}
-	
-	/*
+	/**
+	 * Determines whether a vertical movement is valid for the selected Pawn piece
+	 *
 	 * This method checks to see whether the pawn can move vertically the given amount of squares.
 	 * Usually it will be -1 for white pawns and 1 for black pawns, but it can also be -2 or 2 for
-	 * the first move.
+	 * the first move. If the piece is still at start, the both 1 and 2 (absolute value) space movements will return true, after being moved only 1 space movements will return true for Pawns.
+	 *
+	 * @return Description: boolean describing whether a vertical movement is a valid option from the selected pieces current position
 	 */
 	public boolean isValidVerticalMovement(int verticalMovement) {
 		if (this.board.getSquare(this.row + verticalMovement,  this.column).getPiece() == null) {
@@ -35,10 +52,14 @@ public class Pawn extends ChessPiece{
 		}
 	}
 	
-	/*
+	/**
+	 * Determines whether a move, specifically a capture, is valid for the selected Pawn piece
+	 *
 	 * This method checks to see whether the pawn can diagonally capture a piece. If there is a piece
 	 * vertically and horizontally by the given amount of squares and it is of an opposite color, then
 	 * the pawn can capture it.
+	 *
+	 * @return Description: boolean describing whether a capture is a valid option from the selected pieces current position
 	 */
 	public boolean isValidCapture(int verticalMovement, int horizontalMovement) {
 		if (this.row + verticalMovement> 7 || this.row + verticalMovement < 0 || this.column + horizontalMovement > 7 || this.column + horizontalMovement < 0) {
@@ -56,7 +77,13 @@ public class Pawn extends ChessPiece{
 			return false;
 		}
 	}
-	
+	/**
+	 * Determines whether a enpassant rule is in effect and usable
+	 *
+	 * This method checks to see whether the pawn is in the position to use enpassant rule to capture another pawn piece from the enemy
+	 *
+	 * @return Description: boolean describing whether the enpassant rule is valid for the current piece
+	 */
 	public boolean enPassant(int verticalMovement, int horizontalMovement) {
 		if (this.row + verticalMovement> 7 || this.row + verticalMovement < 0 || this.column + horizontalMovement > 7 || this.column + horizontalMovement < 0) {
 			return false;
@@ -72,11 +99,14 @@ public class Pawn extends ChessPiece{
 		}
 		return false;
 	}
-	
-	/*
-	 * This function returns an arraylist of all possible moves for the pawn. First, it tests to
-	 * see whether the given pawn has moved before. If no, then it can move forward 2 spaces provided
-	 * that both those spaces are blank. Pawns can also move diagonally to capture.
+
+	/**
+	 * Gets all available moves for the Pawn.
+	 * <p>
+	 * Calls the isValidVerticalMovement and getAvailableCaptures functions for the squares that a Pawn
+	 * can move to: on the first turn they can move twice vertical, otherwise they may move vertical one space forward. They can also move diagonally one space to capture another piece
+	 *
+	 * @return Description: Returns the ArrayList of all possible moves the Pawn can take from its current location.
 	 */
 	public ArrayList<String> getAvailableMoves() {
 		ArrayList<String> possibleMoves = new ArrayList<String>();
@@ -107,11 +137,15 @@ public class Pawn extends ChessPiece{
 		possibleMoves.addAll(this.getAvailableCaptures());
 		return possibleMoves;
 	}
-	
-	/*
+
+	/**
+	 * Gets all available moves for the Pawn.
+	 * <p>
 	 * This function returns an arraylist of all possible capturing moves for the pawn. This is a
 	 * separate function than getAvailableMoves() for determining check, because a pawn moving forward
 	 * does not capture that piece.
+	 *
+	 * @return Description: Returns the ArrayList of all possible attacks the Pawn can take from its current location.
 	 */
 	public ArrayList<String> getAvailableCaptures() {
 		ArrayList<String> possibleCaptures = new ArrayList<String>();
@@ -148,7 +182,14 @@ public class Pawn extends ChessPiece{
 		}
 		return possibleCaptures;
 	}
-
+	/**
+	 * Overwrites default move function from ChessPiece
+	 * <p>
+	 * This function returns nothing and moves the Pawn piece to the designated location by calling the super class move function
+	 * and then considering enpassant and other special rules of the pawn piece.
+	 *
+	 * @param command Description: the designated location to travel to for this Pawn piece.
+	 */
 	public void move(String command) {
 		super.move(command);
 		if ((this.row == 4 && this.hasMoved == false) || (this.row == 5 && this.hasMoved == false)) {
@@ -165,7 +206,14 @@ public class Pawn extends ChessPiece{
 
 		}
 	}
-
+	/**
+	 * Implements promotion rule of chess
+	 * <p>
+	 * This function returns nothing and promotes the current Pawn piece to a specified new piece type upon arrival at the other side of the chess board
+	 * depending on input: Bishop, Rook, Knight, or Queen; with Queen being the default.
+	 *
+	 * @param piece Description: the requested piece type to transform the Pawn into.
+	 */
 	public void promote(String piece) {
 		switch(piece) {
 			case "B": this.board.getSquare(this.row, this.column).currentPiece = new Bishop(this.color, this.board, this.row, this.column); return;
@@ -175,7 +223,15 @@ public class Pawn extends ChessPiece{
 			default: this.board.getSquare(this.row, this.column).currentPiece = new Queen(this.color, this.board, this.row, this.column); return;
 		}
 	}
-
+	/**
+	 * Returns the String representation of this piece.
+	 * <p>
+	 * Returns a String representation of this piece, which is its one-letter color appended by "p",
+	 * representing its status as a Pawn.
+	 *
+	 *
+	 * @return Description: Returns the string representation of this piece.
+	 */
 	public String toString() {
 		return color + "p";
 	}

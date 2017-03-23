@@ -9,6 +9,10 @@ import java.util.Scanner;
  * @version 1.0
  * @since 1.0
  */
+
+/**
+ * Main class to run the chess game
+ */
 public class Chess {
 
 

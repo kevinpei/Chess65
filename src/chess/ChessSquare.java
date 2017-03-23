@@ -10,7 +10,17 @@ public class ChessSquare {
 	public int row;
 	public int column;
 	String appearance;
-	// This is the constructor, which makes every other ChessSquare different in appearance.
+
+	/**
+	 * Chess Square constructor
+	 * <p>
+	 * The constructor for a square that makes up the board.
+	 * Makes every other ChessSquare different in appearance.
+	 *
+	 * @param piece Description: The color of the King. Can be w or b for white and black.
+	 * @param row Description: The row the square goes on the chessboard.
+	 * @param column Description: The column the square goes on the chessboard.
+	 */
 	public ChessSquare(ChessPiece piece, int row, int column) {
 		this.currentPiece = piece;
 		this.row = row;
@@ -23,10 +33,15 @@ public class ChessSquare {
 			this.appearance = "  ";
 		}
 	}
-	/*
+	/**
+	 * Returns the letter value of the numerical column of a square
+	 * <p>
 	 * Because columns will be by letter, this method can convert numbers into their
 	 * equivalent characters.
+	 *
+	 * @return Description: String of the selected square's column.
 	 */
+
 	public String getColumn() {
 		switch(column) {
 		case 0: return "a";
@@ -40,7 +55,13 @@ public class ChessSquare {
 		default: return null;
 		}
 	}
-
+	/**
+	 * Returns the numerical value of the row of a square
+	 * <p>
+	 * Because row will be by number from 0-7, this method can convert numbers into their 1-8 value that the player would understand
+	 *
+	 * @return Description: number value of the selected square's row.
+	 */
 	public int getRow() {
 		switch(row) {
 			case 0: return 8;
@@ -54,9 +75,13 @@ public class ChessSquare {
 			default: return 0;
 		}
 	}
-	/*
+	/**
+	 * Returns the String representation of this square.
+	 * <p>
 	 * This method gives the String representation of each ChessSquare, which is its
 	 * piece or its appearance if there is no piece on it.
+	 *
+	 * @return Description: Returns the string representation of this square.
 	 */
 	public String toString() {
 		if (this.currentPiece != null) {
@@ -65,11 +90,24 @@ public class ChessSquare {
 			return appearance;
 		}
 	}
-	
+	/**
+	 * Returns the String representation of this square.
+	 * <p>
+	 * This method gives the ChessPiece object currently on this square, if it is empty it returns null.
+	 *
+	 * @return Description: Returns the ChessPiece object on this current square.
+	 */
 	public ChessPiece getPiece() {
 		return currentPiece;
 	}
-	
+
+	/**
+	 * Returns the String representation of this squares coordinates.
+	 * <p>
+	 * This method gives the String representation of the location of this specific square
+	 *
+	 * @return Description: Returns the string representation of this square's location.
+	 */
 	public String getPosition() {
 		return this.getColumn() + (this.getRow());
 	}

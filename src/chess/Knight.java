@@ -64,13 +64,13 @@ public class Knight extends ChessPiece{
 	 */
 	public ArrayList<String> getAvailableMoves() {
 		
-		/**
+		/*
 		 * An ArrayList of Strings that holds the string representations of all possible moves that 
 		 * can be taken by the Knight.
 		 */
 		ArrayList<String> possibleMoves = new ArrayList<String>();
 		
-		/**
+		/*
 		 * A 2-dimensional array of integers that holds all the positions a knight can move to. Each of 
 		 * these positions will be checked by isValidSquare to see if they are valid moves for the knight.
 		 */

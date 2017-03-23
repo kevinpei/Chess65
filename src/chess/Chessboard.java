@@ -18,7 +18,14 @@ public class Chessboard {
 	ChessSquare enPassantLocationBlack;
 
 
-	//This function initializes a given side's non-pawn pieces
+	/**This function initializes a given side's non-pawn pieces
+	 * <p>
+	 *     places a row of non-pawn pieces on the specified row of the board, all of the given color
+	 * </p>
+	 *
+	 * @param row Description: the row on which each of a color's non-pawn pieces will be placed
+	 * @param color Description: the color of which all of the pieces will be made on the specified row
+	 */
 	public void initializeSide(int row, String color) {
 		this.chessboard[row][0] = new ChessSquare(new Rook(color, this, row, 0), row, 0);
 		this.chessboard[row][1] = new ChessSquare(new Knight(color, this, row, 1), row, 1);
@@ -29,8 +36,10 @@ public class Chessboard {
 		this.chessboard[row][6] = new ChessSquare(new Knight(color, this, row, 6), row, 6);
 		this.chessboard[row][7] = new ChessSquare(new Rook(color, this, row, 7), row, 7);
 	}
-	
-	//This is the constructor. It automatically populates the chessboard with ChessSquares
+
+	/**This is the constructor. It automatically populates the chessboard with ChessSquares for either side, and prepares the chess game to be played
+	 *
+	 */
 	public Chessboard() {
 		//Initializes the black side's non-pawn pieces
 		initializeSide(0, "b");
@@ -60,8 +69,11 @@ public class Chessboard {
 		this.chessboard[3][3] = new ChessSquare(new Pawn("b", this, 3, 3), 3, 3);
 		*/
 	}
-	
-	//Converts the chessboard into a string representation
+
+	/**Converts the chessboard into a string representation
+	 *
+	 * @return Description: a String representation of the entire Chess board of the current game, formatted to act as the visual aid to play the game
+	 */
 	public String toString() {
 		String output = new String();
 		//Adds whatever's on each ChessSquare to the output string
@@ -77,9 +89,12 @@ public class Chessboard {
 		return output;
 	}
 	
-	/*
+	/**
 	 * This function returns all possible moves of every piece of a given color.
 	 * It is used to determine if there is a stalemate.
+     *
+     * @param color Description: Color of the team that a list of Available moves should be generated for ("b":black or "w":white).
+     * @return Description: Returns an ArrayList of the available moves of the specified team given the current positions of the pieces on the board
 	 */
 	public ArrayList<String> getColorAvailableMoves(String color) {
 		ArrayList<String> allPieceMoves = new ArrayList<String>();
@@ -97,9 +112,12 @@ public class Chessboard {
 		return allPieceMoves;
 	}
 	
-	/*
+	/**
 	 * This function returns all possible capturing moves of every piece of a given color. This is used
 	 * to determine whether a king is in checkmate and whether a given move will move it into check.
+     *
+     * @param color Description: Color of the team that a list of Available captures should be generated for ("b":black or "w":white).
+     * @return Description: Returns an ArrayList of the available captures that can be performed by the specified team given the current positions of the pieces on the board
 	 */
 	public ArrayList<String> getColorAvailableCaptures(String color) {
 		ArrayList<String> allPieceMoves = new ArrayList<String>();
@@ -120,8 +138,13 @@ public class Chessboard {
 		}
 		return allPieceMoves;
 	}
-	
-	//This function returns the ChessSquare[][] chessboard
+
+    /**This function returns the ChessSquare[][] chessboard
+     *
+     * The board of play for chess is made up of a two-dimensional array
+     * @return Description: Returns two-dimensional array containing all of the squares on the board, squares subsequently can have pieces.
+     * Therefore this method returns the current state of the running game of chess
+     */
 	public ChessSquare[][] getBoard() {
 		return this.chessboard;
 	}

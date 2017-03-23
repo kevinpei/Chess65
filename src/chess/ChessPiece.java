@@ -8,7 +8,8 @@ import java.util.HashMap;
  * @version 1.0
  * @since 1.0
  */
-/*
+
+/**
  *An abstract class which contains all the methods necessary for creating the other chess pieces. 
  */
 public abstract class ChessPiece {
@@ -27,16 +28,32 @@ public abstract class ChessPiece {
 			return false;
 		}
 	}
-	// The constructor used for each ChessPiece.
+
+	/** The constructor used for each ChessPiece.
+	 *
+	 * @param color Description: String of Color to be assigned to the generated ChessPiece.
+	 * @param board Description: Chessboard object of the Board for the created ChessPiece to be placed on.
+	 * @param row Description: Numerical value of the row for the piece to be placed.
+	 * @param column Description: Numerical value of the column for the piece to be placed.
+	 */
 	public ChessPiece(String color, Chessboard board, int row, int column) {
 		this.color = color;
 		this.board = board;
 		this.row = row;
 		this.column = column;
 	}
-	// A method to convert the piece into its string representation.
+
+	/** A method to convert the piece into its string representation.
+	 *
+	 * @return Description: Abstract method to be implemented on implementing ChessPiece types
+	 */
 	public abstract String toString();
 
+	/**
+	 * Generic move method that takes the implicit Chess Piece and moves it to the given location
+	 * It checks to make sure it is valid to move to that place
+	 * @param command Description: String form of a location to send the Chess Piece
+	 */
 	public void move(String command) {
 		char columnChar = command.charAt(0);
 		int rowChar = Character.getNumericValue(command.charAt(1));

@@ -8,11 +8,29 @@ import java.util.ArrayList;
  * @since 1.0
  */
 public class Bishop extends ChessPiece{
-	
+
+	/**
+	 * Bishop constructor
+	 * <p>
+	 * The constructor for Bishop calls the ChessPiece super constructor.
+	 *
+	 * @param color Description: The color of the Bishop. Can be w or b for white and black.
+	 * @param board Description: The chessboard the Bishop is located in.
+	 * @param row Description: The row the Bishop starts on in the chessboard.
+	 * @param column Description: The column the Bishop starts on in the chessboard.
+	 */
 	public Bishop(String color, Chessboard board, int row, int column) {
 		super(color, board, row, column);
 	}
-	
+
+	/**
+	 * Gets all available moves for the Bishop.
+	 * <p>
+	 * determines the legal squares that this Bishop can move to from its current location
+	 * Bishops can move: as far as the player would like in a unblocked diagonal line
+	 *
+	 * @return Description: Returns the ArrayList of all possible moves the Bishop can take from its current location.
+	 */
 	public ArrayList<String> getAvailableMoves() {
 		ArrayList<String> possibleMoves = new ArrayList<String>();
 		// j will keep track of whatever i isn't keeping track of to ensure diagonal movement.
@@ -108,6 +126,16 @@ public class Bishop extends ChessPiece{
 		return possibleMoves;
 	}
 
+
+	/**
+	 * Returns the String representation of this piece.
+	 * <p>
+	 * Returns a String representation of this piece, which is its one-letter color appended by "B",
+	 * representing its status as a Bishop.
+	 *
+	 *
+	 * @return Description: Returns the string representation of this piece.
+	 */
 	public String toString() {
 		return color + "B";
 	}

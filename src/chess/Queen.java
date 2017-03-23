@@ -2,12 +2,37 @@ package chess;
 
 import java.util.ArrayList;
 
+/**
+ * @author Kevin Pei and Andrew Dos Reis
+ * @version 1.0
+ * @since 1.0
+ */
+
 public class Queen extends ChessPiece{
 
+    /**
+     * Queen constructor
+     * <p>
+     * The constructor for Queen calls the ChessPiece super constructor.
+     *
+     * @param color Description: The color of the Queen. Can be w or b for white and black.
+     * @param board Description: The chessboard the Queen is located in.
+     * @param row Description: The row the Queen starts on in the chessboard.
+     * @param column Description: The column the Queen starts on in the chessboard.
+     */
 	public Queen(String color, Chessboard board, int row, int column) {
 		super(color, board, row, column);
 	}
-	
+
+
+    /**
+     * Gets all available moves for the Queen.
+     * <p>
+     * determines the legal squares that this Queen can move to from its current location
+     * Queen can move: as far as the player would like in a unblocked horizontal, vertical, or diagonal line
+     *
+     * @return Description: Returns the ArrayList of all possible moves the Queen can take from its current location.
+     */
 	public ArrayList<String> getAvailableMoves() {
 		ArrayList<String> possibleMoves = new ArrayList<String>();
 		/*
@@ -168,6 +193,15 @@ public class Queen extends ChessPiece{
 		return possibleMoves;
 	}
 
+    /**
+     * Returns the String representation of this piece.
+     * <p>
+     * Returns a String representation of this piece, which is its one-letter color appended by "Q",
+     * representing its status as a Queen.
+     *
+     *
+     * @return Description: Returns the string representation of this piece.
+     */
 	public String toString() {
 		return color + "Q";
 	}
